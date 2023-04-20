@@ -30,7 +30,7 @@ belastingCodes %>% filter(str_detect(Title, "Toerist")) %>% select(Identifier,Ti
 
 # Haal de data op
 targetUrl <- paste0(tableUrl,"/Observations?$filter=BelastingenEnWettelijkePremies eq 'A045081'")
-data <- get_odata(targetUrl)
+data <- get_odata(URLencode(targetUrl))
 
 # Verwijder overbodige kolommen
 data <- data %>% select(Perioden, Value)
