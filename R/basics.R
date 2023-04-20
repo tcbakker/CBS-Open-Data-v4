@@ -41,5 +41,5 @@ data <- data %>%
 wijken_en_buurtencodes <- get_odata(paste0(tableUrl,"/WijkenEnBuurtenCodes"))
 wijken_en_buurtencodes %>% filter(str_detect(Title, "Amsterdam"))
 
-targetUrl <- paste0(tableUrl,"/Observations?$filter=WijkenEnBuurten eq \'GM0363\'")
+targetUrl <- paste0(tableUrl,"/Observations?$filter=WijkenEnBuurten%02eq%20\'GM0363\'")
 data_amsterdam <- get_odata(targetUrl)
