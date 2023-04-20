@@ -26,7 +26,7 @@ get_odata <- function(targetUrl) {
 
 # De geodata wordt via de API van het Nationaal Georegister van PDOK opgehaald.
 # Een overzicht van beschikbare data staat op https://www.pdok.nl/datasets.
-geoUrl <- "https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=2.0.0&typeName=cbs_gemeente_2017_gegeneraliseerd&outputFormat=json"
+geoUrl <- "https://service.pdok.nl/cbs/gebiedsindelingen/2017/wfs/v1_0?request=GetFeature&service=WFS&version=2.0.0&typeName=gemeente_gegeneraliseerd&outputFormat=json"
 fileName <- "gemeentegrenzen2017.geojson"
 download.file(geoUrl, fileName)
 gemeentegrenzen <- geojson_read(fileName, what = "sp")
@@ -38,7 +38,7 @@ codes %>% filter(str_detect(Title,"Geboorte"))
 
 targetUrl <- paste0(tableUrl,"/Observations?$filter=Measure eq \'M000173_2\' and startswith(WijkenEnBuurten,\'GM\')")
 
-geboorten_per_gemeente <- get_odata(targetUrl) %>%
+geboorten_per_gemeente <- get_odata(URLencode(targetUrl)) %>%
   mutate(WijkenEnBuurten = str_trim(WijkenEnBuurten)) %>%
   rename(relatieve_geboorte = Value)
 
